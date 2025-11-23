@@ -1,0 +1,436 @@
+@charset "utf-8";
+
+
+/*Google Fontsの読み込み
+---------------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap');
+
+
+/*Font Awesomeの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+
+/*テンプレート専用cssファイルの読み込み
+---------------------------------------------------------------------------*/
+@import url("inview.css");
+
+
+/*opa1のキーフレーム設定
+---------------------------------------------------------------------------*/
+@keyframes opa1 {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+
+/*CSSカスタムプロパティ（サイト全体を一括管理する為の設定）
+---------------------------------------------------------------------------*/
+:root {
+	--primary-color: #F8F6F3;			/*テンプレートの土台カラー*/
+	--primary-inverse-color: #725A4C;	/*上のprimary-colorの対となる色*/
+	
+	--secondary-color: #F8F6F3;			/*テンプレートのサブまたはアクセントカラー*/
+	--secondary-inverse-color: #725A4C;	/*上のsecondary-colorの対となる色*/
+
+	--secondary-color2: #F8F6F3;			/*テンプレートのサブまたはアクセントカラー*/
+	--secondary-inverse-color2: #725A4C;	/*上のsecondary-colorの対となる色*/
+
+	--secondary-color3: #F8F6F3;			/*テンプレートのサブまたはアクセントカラー*/
+	--secondary-inverse-color3: #725A4C;	/*上のsecondary-colorの対となる色*/
+
+	--secondary-color4: #544538;			/*テンプレートのサブまたはアクセントカラー*/
+	--secondary-inverse-color4: #fff;	/*上のsecondary-colorの対となる色*/
+	
+	--accent-color: #e146a1;			/*アクセントカラー*/
+	--accent-inverse-color: #fff;		/*アクセントカラーの対となる色*/
+	
+	--global-space: 20px;				/*主に余白の一括管理用*/
+}
+
+
+/*テキストのフェードイン設定
+---------------------------------------------------------------------------*/
+/*アニメーション設定*/
+@keyframes fadeIn {
+	0% {opacity: 0;transform: scale(0.1) rotate(-30deg);}
+	100% {opacity: 1;transform: scale(1) rotate(0deg);}
+}
+
+/* 初期状態でテキストを非表示にする */
+.fade-in-text {
+    visibility: hidden;
+}
+
+/* アニメーションを適用するクラス。
+animationの行の「0.2s」が文字の出現のなめらかさで、大きいほどなめらかに出てきます。小さいとタイピングのようにカクカク出ます。
+１文字ずつの出現する際の時差は、js/main.jsの「テキストのフェードイン効果」の中にある「0.1」で調整できます。*/
+.char {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 0.2s linear both;
+}
+
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+body * {box-sizing: border-box;}
+
+html,body {
+	height: 100%;
+	font-size: 13px;	/*基準となるフォントサイズ。*/
+}
+
+	/*画面幅900px以上の追加指定*/
+	@media screen and (min-width:900px) {
+
+	html, body {
+		font-size: 14px;	/*基準となるフォントサイズ。*/
+	}
+
+	}/*追加指定ここまで*/
+
+
+body {
+	margin: 0;padding: 0;
+	font-family: "Zen Maru Gothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
+	-webkit-text-size-adjust: none;
+	line-height: 2.5;		/*行間*/
+	background: #463f39;	/*背景色*/
+	color: var(--primary-inverse-color);	/*文字色。冒頭のprimary-inverse-colorを読み込みます。*/
+	overflow-x: hidden;
+}
+
+/*リセット他*/
+figure {margin: 0;}
+dd {margin: 0;}
+nav ul {list-style: none;}
+nav,ul,li,ol {margin: 0;padding: 0;}
+section li {margin-left: 1rem;}
+
+/*table全般の設定*/
+table {border-collapse:collapse;}
+
+/*画像全般の設定*/
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+
+/*videoタグ*/
+video {max-width: 100%;}
+
+/*iframeタグ*/
+iframe {width: 100%;}
+
+/*他*/
+input {font-size: 1rem;}
+
+
+/*リンクテキスト全般の設定
+---------------------------------------------------------------------------*/
+a {
+	color: inherit;
+	transition: 0.3s;	/*hoverまでにかける時間。0.3秒。*/
+}
+
+/*マウスオン時*/
+a:hover {
+	text-decoration: none;
+}
+
+
+/*header（ロゴが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*大きな画面で見た場合に両サイドに見える画像*/
+header::before {
+	background: url("../images/bg_header.jpg") no-repeat center center / cover;	/*背景画像の読み込み*/
+}
+
+/*このブロック内のcontents*/
+header .contents {
+	color: #fff;	/*文字色*/
+	padding: 0;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	background: url("../images/1.jpg") no-repeat center center / cover;	/*背景画像の読み込み*/
+}
+
+header .contents a {color: inherit;}
+
+/*ロゴ、謳い文句、ロゴ上の装飾画像を囲むボックス*/
+header #logo-container {
+	flex: 1;
+	background: rgba(66,42,22,0.8);	/*背景色。66,42,22はRGB値での色指定で0.8は色が80%出た状態。写真そのまま出したいならこの１行を削除。*/
+	padding: 30px 10px 25px;		/*上、左右、下への余白*/
+	position: relative;
+	text-align: center;
+}
+
+/*ロゴ画像*/
+header .logo img {
+	display: block;
+	margin: 0 auto;
+	width: 250px;		/*ロゴ画像の幅。お好みで。*/
+}
+
+/*謳い文句*/
+header p {
+	display: block;
+	font-size: 0.8rem;	/*文字サイズ80%*/
+}
+
+/*ロゴ上の装飾画像（New Open）*/
+header .kazari {
+	position: absolute;
+	left: 20%;		/*ロゴが入ったボックスに対して左からの配置指定*/
+	top: -50px;		/*ロゴが入ったボックスに対して上からの配置指定。マイナスがつくので、ボックスから飛び出る形になります。*/
+	width: 140px;	/*画像の幅*/
+}
+
+
+/*ヘッダー下部のSCROLLアニメーション
+---------------------------------------------------------------------------*/
+/*アニメーション設定*/
+@keyframes scroll-line {
+  0% {transform: scaleY(1);}
+  50% {transform: scaleY(0);}
+  100% {transform: scaleY(0);}
+}
+
+/*ラインアニメーションを囲むブロック*/
+.scroll-container {
+	position: absolute;
+	width: 100px;
+	left: calc(50% - 50px);
+	bottom: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 0.85rem;	/*SCROLLのテキストのサイズ。85%*/
+}
+
+/*「SCROLL」のテキスト部分*/
+.scroll-container p {
+	margin: 0;padding: 0;
+	text-align: center;
+	width: 60px;		/*幅*/
+	line-height: 60px;	/*高さ*/
+	border: 1px solid rgba(255,255,255,0.5);	/*テキストの色。255,255,255は白のことで0.5は色が50%出た状態。*/
+	border-radius: 50%;	/*枠を円形にする*/
+}
+
+/*ラインアニメーションの土台部分*/
+.scroll-line {
+	margin: 0 auto;
+	position: relative;
+	width: 1px;		/*ラインアニメーションの幅。お好みで。*/
+	height: 50px;	/*ラインアニメーションの高さ。お好みで。*/
+	background: rgba(255,255,255,0.5);	/*ラインアニメーションの土台部分の色。255,255,255は白のことで0.5は色が50%出た状態。*/
+}
+
+/*ラインアニメーション本体*/
+.scroll-line span {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: #fff;	/*ラインアニメーションの色*/
+	animation: scroll-line 2s infinite;	/*2sがアニメーションにかける時間。2秒。*/
+	transform-origin: bottom;
+}
+
+
+/*ヘッダーメニュー（大きな画面で見た場合に左側に固定表示されるメニュー）
+---------------------------------------------------------------------------*/
+/*1000px未満は非表示*/
+#header-menu {
+	display: none;
+}
+
+	/*画面幅1000px以上の追加指定*/
+	@media screen and (min-width:1000px) {
+
+	#header-menu {
+		display: block;	/*表示させる*/
+		position: fixed;z-index: 1;
+		left: 0px;
+		top: 100px;	/*上からの配置場所*/
+	}
+	
+	/*メニュー１個あたり*/
+	#header-menu li a {
+		text-decoration: none;display: block;
+		background: var(--secondary-color);		/*背景色。冒頭のsecondary-colorを読み込む。*/
+		color: var(--secondary-inverse-color);	/*文字色。冒頭のsecondary-inverse-colorを読み込む。*/
+		margin-bottom: 30px;					/*下に空けるスペース。メニュー同士の上下間の隙間。*/
+		border-radius: 0px 100px 100px 0px;		/*角丸の指定。左上、右上、右下、左下への順。100pxの所はとりあえず大きな数字にしておけばOK。*/
+		padding: 10px 30px 10px 20px;	/*ボタン内の余白。上、右、下、左への順番。*/
+		font-size: 1.2rem;	/*文字サイズを120%に。*/
+	}
+	
+	/*現在表示中のメニューの背景色と、マウスオン時共通*/
+	#header-menu li.active a,
+	#header-menu li a:hover {
+		background: var(--accent-color);	/*css冒頭のaccent-colorを読み込む*/
+	}
+
+	}/*追加指定ここまで*/
+
+
+/*背景画像共通（大きな画面で見た場合に両サイドに見える画像）
+---------------------------------------------------------------------------*/
+.section::before {
+	opacity: 0;
+	transition: opacity 1s; /* 1秒かけてフェードイン/フェードアウト */
+	content: '';
+	position: fixed;z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.section.active::before {
+	opacity: 1;
+}
+.section.inactive::before {
+	opacity: 0;
+}
+
+
+/*contents（各セクションブロック直下にあるボックス）
+---------------------------------------------------------------------------*/
+.contents {
+	background: var(--primary-color);		/*背景色。冒頭のprimary-colorを読み込む。*/
+	color: var(--primary-inverse-color);	/*文字色。冒頭のprimary-inverse-colorを読み込む。*/
+	padding: var(--global-space);			/*ボックス内の余白。冒頭のglobal-spaceを読み込む。*/
+	position: relative;
+	overflow-x: hidden;
+}
+
+	/*画面幅600px以上の追加指定*/
+	@media screen and (min-width:600px) {
+
+	.contents,
+	#gallery .gallery-box {
+		max-width: 560px;	/*大きな画面になった場合のコンテンツ幅*/
+		margin: 0 auto;		/*画面の左右中央に配置*/
+		overflow-x: visible;
+	}
+
+	}/*追加指定ここまで*/
+
+
+/*h2見出し共通*/
+.contents h2 {
+	margin: 0;
+	line-height: 1.8;	/*行間をデフォルトより狭くする。２行になった場合に間があきすぎるので。*/
+	padding: 20px 0;	/*上下、左右への余白*/
+	font-size: 1.8rem;	/*文字サイズ180%*/
+	text-align: center;	/*テキストをセンタリング*/
+}
+
+/*h2内の小文字*/
+.contents h2 span.hosoku {
+	display: block;
+	font-size: 0.7rem;		/*文字サイズを70%に*/
+	letter-spacing: 0.1em;	/*文字間隔を少しだけ広く*/
+	padding-bottom: 0.5rem;	/*下の見出しとの間の余白。0.5文字分。*/
+}
+
+
+/*オープニング特別メニュー（specialブロック）
+---------------------------------------------------------------------------*/
+/*大きな画面で見た場合に両サイドに見える画像*/
+#special::before {
+	background: url('../images/bg_special.jpg') no-repeat center center / cover;	/*背景画像の読み込み*/
+}
+
+/*このブロック内のcontents*/
+#special .contents {
+	background: var(--accent-color) /*背景色。冒頭のaccent-colorを読み込む。*/
+	url("../images/bg_special.png") no-repeat center top / 100%;	/*背景画像の読み込み。見出しの上にある装飾画像です。*/
+	color: var(--accent-inverse-color);	/*文字色。冒頭のaccent-inverse-colorを読み込む。*/
+}
+
+
+/*横スライドインタイプのスライドショー（１枚目の画像のアスペクト比が反映されるタイプ）
+---------------------------------------------------------------------------*/
+/*3枚の画像を囲むブロック*/
+.slide5 {
+	position: relative;
+	overflow: hidden;
+}
+
+/*３枚の画像の共通設定*/
+.slide5 .slide {
+	position: absolute;right: 0px;top: 0px;
+	width: 100%;
+	height: 100%;
+	transform: translateX(100%);
+	transition: transform 0.7s ease;	/*0.7sはスライドにかける時間（0.7秒）。0.7を変更する場合、main.jsのスライドショー用のコードの最後の「700」も変更する。*/
+}
+
+/*アクティブ時*/
+.slide5 .slide.active {
+	transform: translateX(0);
+}
+
+/*左に移動*/
+.slide5 .slide.left {
+	transform: translateX(-100%);
+}
+
+/*非表示*/
+.slide5 .slide.hidden {
+	opacity: 0;
+}
+
+/*初期表示用*/
+.slide5 .slide.initial {
+	transform: translateX(0);
+	transition: none;
+}
+
+/*１枚目画像（変更不要）*/
+.slide5 .img1 {
+	position: relative;width: 100%;height: auto;
+}
+
+/*画像のクリップ*/
+.slide5 .slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+/*現在表示されているスライドのみをクリック可能にする設定（変更不要）*/
+.slide5 .slide {
+	pointer-events: none;
+}
+.slide5 .slide.active {
+	pointer-events: auto;
+}
+
+/*現在表示中のボタンブロック*/
+.slide5 .slide-indicators {
+    text-align: center;
+	position: absolute;
+	width: 100%;
+	bottom: 80px;	/*ボタンの配置場所。スライドショーの画面下からの距離。*/
+	left: 0px;
+}
+
+/*ボタン１個あたり*/
+.slide5 .indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #ccc;	/*未アクティブ時のボタン色*/
+	border: 4px solid #fff;	/*枠線の幅、線種、色。*/
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+/*アクティブ時のボタン色*/
